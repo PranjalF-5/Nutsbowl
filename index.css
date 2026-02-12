@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #F3EFE7;
+  color: #2A231E;
+}
+
+/* Hide scrollbar for cleaner look in some browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F3EFE7;
+}
+::-webkit-scrollbar-thumb {
+  background: #D1C7B7;
+  border-radius: 4px;
+}
+.text-outline-cream {
+   text-shadow: -1px -1px 0 #F3EFE7, 1px -1px 0 #F3EFE7, -1px 1px 0 #F3EFE7, 1px 1px 0 #F3EFE7;
+}
