@@ -1,6 +1,14 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-nutribowl-dark: #2A231E;
+  --color-nutribowl-cream: #F3EFE7;
+  --color-nutribowl-gold: #C5A059;
+  --color-nutribowl-brown: #997B40;
+
+  --font-sans: "Geist", "Inter", sans-serif;
+  --font-serif: "Playfair Display", serif;
+}
 
 html {
   scroll-behavior: smooth;
@@ -17,13 +25,22 @@ body {
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: #F3EFE7;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #D1C7B7;
   border-radius: 4px;
 }
+
 .text-outline-cream {
-   text-shadow: -1px -1px 0 #F3EFE7, 1px -1px 0 #F3EFE7, -1px 1px 0 #F3EFE7, 1px 1px 0 #F3EFE7;
+  text-shadow: -1px -1px 0 #F3EFE7, 1px -1px 0 #F3EFE7, -1px 1px 0 #F3EFE7, 1px 1px 0 #F3EFE7;
+}
+
+@layer utilities {
+  .will-change-transform {
+    will-change: transform;
+  }
 }
