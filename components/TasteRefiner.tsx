@@ -26,7 +26,7 @@ export const TasteRefiner: React.FC = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: i * 0.1 }}
-                        className={`${cat.bg} rounded-3xl p-6 aspect-square flex flex-col justify-between cursor-pointer hover:scale-95 transition-transform duration-300 group`}
+                        className={`${cat.bg} rounded-3xl p-6 aspect-square flex flex-col justify-between cursor-pointer hover:scale-95 transition-transform duration-300 group will-change-transform`}
                     >
                         <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm group-hover:bg-white/20 transition-colors">
                             {cat.icon}

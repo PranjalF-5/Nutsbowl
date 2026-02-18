@@ -143,14 +143,14 @@ export const ProductCollection: React.FC<ProductCollectionProps> = ({ onAddToCar
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
-                className={`group relative rounded-[2rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 ${styles.bg} ${styles.border || ''} flex flex-col h-[500px]`}
+                className={`group relative rounded-[2rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 ${styles.bg} ${styles.border || ''} flex flex-col h-[500px] will-change-transform`}
               >
                 {/* Premium Background Effects */}
                 {product.type === 'premium' && (
                   <>
                     <div className="absolute inset-0 bg-gradient-to-br from-[#2a2a2a] via-[#1a1a1a] to-black z-0" />
-                    {/* Animated Glow Aura behind the packet */}
-                    <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] ${styles.glow} opacity-30 blur-[100px] group-hover:opacity-50 transition-opacity duration-700`} />
+                    {/* Animated Glow Aura - Optimized blur and opacity */}
+                    <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] h-[100%] ${styles.glow} opacity-20 blur-[60px] group-hover:opacity-40 transition-opacity duration-700`} />
                     <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none mix-blend-overlay"
                       style={{ backgroundImage: `url("https://grainy-gradients.vercel.app/noise.svg")` }}
                     />
@@ -169,19 +169,20 @@ export const ProductCollection: React.FC<ProductCollectionProps> = ({ onAddToCar
                   </div>
 
                   {/* Packet Image Placeholder */}
-                  <div className="flex-1 w-full relative flex items-center justify-center my-4 group-hover:scale-105 transition-transform duration-500">
-                    {/* Shadow for the packet */}
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-3/4 h-8 bg-black/40 blur-xl rounded-full" />
+                  <div className="flex-1 w-full relative flex items-center justify-center my-4 group-hover:scale-105 transition-transform duration-500 will-change-transform">
+                    {/* Simplified Shadow for performance */}
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-3/4 h-8 bg-black/20 blur-lg rounded-full" />
 
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="h-full w-full object-contain drop-shadow-2xl relative z-10 mask-packet"
-                      style={{ filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.5))' }}
+                      loading="lazy"
+                      className="h-full w-full object-contain relative z-10 mask-packet"
+                    // Removed filter: drop-shadow which is very expensive
                     />
 
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                      <span className={`bg-white/90 text-nutribowl-dark px-4 py-2 rounded-lg text-xs font-bold shadow-lg backdrop-blur`}>
+                      <span className={`bg-white/90 text-nutribowl-dark px-4 py-2 rounded-lg text-xs font-bold shadow-lg backdrop-blur-sm`}>
                         View Packet
                       </span>
                     </div>
@@ -198,9 +199,9 @@ export const ProductCollection: React.FC<ProductCollectionProps> = ({ onAddToCar
                     <button
                       onClick={() => onAddToCart(product)}
                       className={`mt-4 w-full ${product.type === 'premium'
-                        ? 'bg-gradient-to-r from-[#D4B483] to-[#C5A059] text-nutribowl-dark hover:brightness-110 shadow-[0_0_15px_rgba(212,180,131,0.3)]'
+                        ? 'bg-gradient-to-r from-[#D4B483] to-[#C5A059] text-nutribowl-dark hover:brightness-110 shadow-[0_0_15px_rgba(212,180,131,0.2)]'
                         : 'bg-nutribowl-dark text-white hover:bg-nutribowl-gold'
-                        } py-3 rounded-xl font-sans text-xs font-bold uppercase tracking-widest transition-all duration-300 transform group-hover:-translate-y-1`}
+                        } py-3 rounded-xl font-sans text-xs font-bold uppercase tracking-widest transition-transform duration-300 transform group-hover:-translate-y-1`}
                     >
                       Add to Bowl
                     </button>
