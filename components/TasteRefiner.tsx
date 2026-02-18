@@ -43,17 +43,17 @@ export const TasteRefiner: React.FC = () => {
                     transition={{ delay: 0.3 }}
                     className="rounded-3xl overflow-hidden aspect-square relative group bg-black"
                 >
-                     <img 
-                        src="https://images.unsplash.com/photo-1594046243098-0fceea9d451e?auto=format&fit=crop&q=80&w=400" 
-                        alt="Walnut" 
+                    <img
+                        src="https://images.unsplash.com/photo-1594046243098-0fceea9d451e?auto=format&fit=crop&q=80&w=400"
+                        alt="Walnut"
                         className="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-700"
-                     />
-                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                     <div className="absolute bottom-6 left-6">
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-6 left-6">
                         <div className="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center">
                             <MoveRight className="w-4 h-4 text-white" />
                         </div>
-                     </div>
+                    </div>
                 </motion.div>
             </div>
         </section>
