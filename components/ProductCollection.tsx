@@ -51,7 +51,7 @@ const products: Product[] = [
     price: 15,
     type: 'everyday',
     theme: 'light',
-    image: 'https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?auto=format&fit=crop&q=80&w=600',
+    image: 'https://images.unsplash.com/photo-1641430470762-13c3489762e7?auto=format&fit=crop&q=80&w=600',
   },
   {
     id: '5',
@@ -61,7 +61,7 @@ const products: Product[] = [
     price: 12,
     type: 'everyday',
     theme: 'light',
-    image: 'https://images.unsplash.com/photo-1599522316523-281b374944b2?auto=format&fit=crop&q=80&w=600',
+    image: 'https://images.unsplash.com/photo-1642102903918-b97c37955bbf?auto=format&fit=crop&q=80&w=600',
   },
   {
     id: '6',
@@ -71,7 +71,7 @@ const products: Product[] = [
     price: 18,
     type: 'everyday',
     theme: 'light',
-    image: 'https://images.unsplash.com/photo-1543363385-d62f444c3fb2?auto=format&fit=crop&q=80&w=600',
+    image: 'https://images.unsplash.com/photo-1726771517475-e7acdd34cd8a?auto=format&fit=crop&q=80&w=600',
   }
 ];
 
