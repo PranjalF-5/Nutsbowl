@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, ShoppingBag } from 'lucide-react';
 import { Product } from '../types';
 
 interface ProductCollectionProps {
@@ -12,34 +13,34 @@ const products: Product[] = [
     id: '1',
     name: 'Royal Almonds',
     subname: '100% NATURAL',
-    description: 'Natural & Healthy',
+    description: 'Crunchy, hand-picked almonds from California orchards, rich in Vitamin E.',
     price: 24,
     type: 'premium',
+    // Ultra-Deep Rich Brown/Maroon
     theme: 'dark',
-    // Deep Maroon/Burgundy
-    image: '/images/premium_almonds.png',
+    image: '/images/premium_almond.png?v=2',
   },
   {
     id: '2',
     name: 'Obsidian Raisins',
     subname: 'PREMIUM SELECTION',
-    description: 'Sweet & Chewy',
+    description: 'Sun-dried black raisins with an intense, natural sweetness.',
     price: 18,
     type: 'premium',
+    // Deep Violet/Ink
     theme: 'dark',
-    // Deep Purple
-    image: '/images/premium_raisins.png',
+    image: '/images/premium_raisin.png?v=2',
   },
   {
     id: '3',
     name: 'Imperial Cashew',
     subname: 'HAND PICKED',
-    description: 'Creamy Delight',
+    description: 'Creamy, buttery whole cashews roasted to perfection.',
     price: 28,
     type: 'premium',
+    // Deep Gold/Bronze
     theme: 'gold',
-    // Beige
-    image: '/images/premium_cashew.png',
+    image: '/images/premium_cashew.png?v=2',
   },
 
   // --- Everyday Essentials ---
@@ -47,7 +48,7 @@ const products: Product[] = [
     id: '4',
     name: 'California Almonds',
     subname: 'DAILY ESSENTIAL',
-    description: 'Crunchy & Fresh',
+    description: 'Perfect for daily snacking and baking needs.',
     price: 15,
     type: 'everyday',
     theme: 'light',
@@ -57,7 +58,7 @@ const products: Product[] = [
     id: '5',
     name: 'Golden Raisins',
     subname: 'SUN DRIED',
-    description: 'Natural Sweetness',
+    description: 'Naturally sweet golden raisins for your morning bowl.',
     price: 12,
     type: 'everyday',
     theme: 'light',
@@ -67,7 +68,7 @@ const products: Product[] = [
     id: '6',
     name: 'Whole Cashews',
     subname: 'W320 GRADE',
-    description: 'Perfect for Snacking',
+    description: 'Wholesome cashews for a quick energy boost.',
     price: 18,
     type: 'everyday',
     theme: 'light',
@@ -75,18 +76,14 @@ const products: Product[] = [
   }
 ];
 
-// Helper to get styles based on theme/type
-const getCardStyles = (product: Product) => {
+// Helper to get card colors
+const getCardColors = (product: Product) => {
   if (product.type === 'premium') {
-    // Premium: Unified Luxury Dark Background + Product Specific Glow
-    const base = { bg: 'bg-[#1a1a1a]', text: 'text-[#F5E6D3]', accent: 'text-[#D4B483]' };
-
-    if (product.name.includes('Almonds')) return { ...base, glow: 'bg-[#4A1D24]' }; // Maroon Glow
-    if (product.name.includes('Raisins')) return { ...base, glow: 'bg-[#2D1B36]' }; // Purple Glow
-    return { ...base, glow: 'bg-[#D8CCBB]' }; // Beige/Gold Glow
+    if (product.name.includes('Almonds')) return { bg: 'bg-[#2A1A1A]', accent: 'text-[#D4B483]', btn: 'bg-[#4A2C2C]' };
+    if (product.name.includes('Raisins')) return { bg: 'bg-[#1A1521]', accent: 'text-[#D7BDE2]', btn: 'bg-[#2D1B36]' };
+    return { bg: 'bg-[#1C1A16]', accent: 'text-[#E5CCA9]', btn: 'bg-[#3E3424]' };
   }
-  // Everyday styles (Lighter, fresher)
-  return { bg: 'bg-white', text: 'text-nutribowl-dark', accent: 'text-nutribowl-gold', border: 'border border-nutribowl-bg' };
+  return { bg: 'bg-white', accent: 'text-nutribowl-brown', btn: 'bg-nutribowl-dark' };
 };
 
 export const ProductCollection: React.FC<ProductCollectionProps> = ({ onAddToCart }) => {
@@ -95,123 +92,103 @@ export const ProductCollection: React.FC<ProductCollectionProps> = ({ onAddToCar
   const filteredProducts = products.filter(p => p.type === activeTab);
 
   return (
-    <section className="px-4 py-24 max-w-7xl mx-auto space-y-12">
+    <section className="px-4 py-24 max-w-7xl mx-auto space-y-16">
 
-      {/* Section Header */}
-      <div className="text-center mb-8 relative">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-nutribowl-gold/10 rounded-full blur-3xl -z-10" />
-        <span className="font-serif italic text-nutribowl-brown-light text-xl">Our Collection</span>
-        <h2 className="font-serif text-4xl mt-2 text-nutribowl-dark">Choose Your Selection</h2>
+      {/* Header & Tabs */}
+      <div className="flex flex-col items-center justify-center text-center space-y-8">
+        <div>
+          <span className="font-sans text-xs font-bold tracking-[0.2em] text-nutribowl-gold uppercase mb-3 block">Curated Selection</span>
+          <h2 className="font-serif text-4xl md:text-5xl text-nutribowl-dark">Choose Your Bowl</h2>
+        </div>
+
+        <div className="flex p-1 bg-nutribowl-dark/5 rounded-full relative">
+          <div className={`absolute top-1 bottom-1 w-1/2 bg-white rounded-full shadow-sm transition-all duration-300 ${activeTab === 'everyday' ? 'translate-x-[100%]' : 'translate-x-0'}`} />
+          <button onClick={() => setActiveTab('premium')} className={`relative z-10 px-8 py-2.5 rounded-full font-sans text-[10px] font-bold uppercase tracking-widest transition-colors ${activeTab === 'premium' ? 'text-nutribowl-dark' : 'text-nutribowl-dark/50 hover:text-nutribowl-dark/80'}`}>
+            Signature Premium
+          </button>
+          <button onClick={() => setActiveTab('everyday')} className={`relative z-10 px-8 py-2.5 rounded-full font-sans text-[10px] font-bold uppercase tracking-widest transition-colors ${activeTab === 'everyday' ? 'text-nutribowl-dark' : 'text-nutribowl-dark/50 hover:text-nutribowl-dark/80'}`}>
+            Daily Essentials
+          </button>
+        </div>
       </div>
 
-      {/* Tabs */}
-      <div className="flex justify-center gap-4 mb-12">
-        <button
-          onClick={() => setActiveTab('premium')}
-          className={`px-8 py-3 rounded-full font-sans text-xs font-bold uppercase tracking-widest transition-all duration-300 ${activeTab === 'premium'
-            ? 'bg-nutribowl-dark text-nutribowl-gold shadow-lg scale-105'
-            : 'bg-white text-nutribowl-dark/60 hover:bg-gray-50'
-            }`}
-        >
-          Signature Premium
-        </button>
-        <button
-          onClick={() => setActiveTab('everyday')}
-          className={`px-8 py-3 rounded-full font-sans text-xs font-bold uppercase tracking-widest transition-all duration-300 ${activeTab === 'everyday'
-            ? 'bg-nutribowl-green text-white shadow-lg scale-105'
-            : 'bg-white text-nutribowl-dark/60 hover:bg-gray-50'
-            }`}
-          style={activeTab === 'everyday' ? { backgroundColor: '#668F8D', color: '#fff' } : {}}
-        >
-          Daily Essentials
-        </button>
-      </div>
-
-      <motion.div
-        layout
-        className="grid md:grid-cols-3 gap-8"
-      >
+      {/* Grid */}
+      <motion.div layout className="grid md:grid-cols-3 gap-8 md:gap-10">
         <AnimatePresence mode="popLayout">
-          {filteredProducts.map((product, idx) => {
-            const styles = getCardStyles(product);
+          {filteredProducts.map((product) => {
+            const colors = getCardColors(product);
+            const isPremium = product.type === 'premium';
 
             return (
               <motion.div
                 layout
                 key={product.id}
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3 }}
-                className={`group relative rounded-[2rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 ${styles.bg} ${styles.border || ''} flex flex-col h-[500px] will-change-transform`}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.4 }}
+                className={`group relative rounded-[2rem] overflow-hidden ${colors.bg} h-[520px] shadow-lg hover:shadow-2xl transition-all duration-500`}
               >
-                {/* Premium Background Effects */}
-                {product.type === 'premium' && (
+                {/* 1. Background Layers */}
+                {isPremium ? (
                   <>
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#2a2a2a] via-[#1a1a1a] to-black z-0" />
-                    {/* Animated Glow Aura - Optimized blur and opacity */}
-                    <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] h-[100%] ${styles.glow} opacity-20 blur-[60px] group-hover:opacity-40 transition-opacity duration-700`} />
-                    <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none mix-blend-overlay"
-                      style={{ backgroundImage: `url("https://grainy-gradients.vercel.app/noise.svg")` }}
-                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
+                    {/* Inner Border */}
+                    <div className="absolute inset-[1px] rounded-[2rem] border border-white/10 pointer-events-none" />
                   </>
+                ) : (
+                  <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white pointer-events-none" />
                 )}
 
-                {/* Content */}
-                <div className="relative z-10 p-8 flex flex-col h-full items-center text-center">
+                {/* 2. Top Content: Price */}
+                <div className="relative z-10 p-8 flex justify-end items-start">
+                  <span className={`font-serif text-2xl italic ${isPremium ? 'text-white' : 'text-nutribowl-dark'}`}>
+                    ${product.price}
+                  </span>
+                </div>
 
-                  {/* Header Info */}
-                  <div className="w-full flex justify-between items-start">
-                    <div className={`border ${product.type === 'premium' ? 'border-[#D4B483]/30 bg-black/20' : 'border-nutribowl-dark/10'} px-3 py-1 rounded-full backdrop-blur-md`}>
-                      <span className={`text-[10px] font-bold tracking-[0.2em] uppercase ${styles.accent}`}>{product.subname}</span>
-                    </div>
-                    <span className={`font-serif text-xl italic ${styles.accent}`}>${product.price}</span>
-                  </div>
+                {/* 3. Product Image (Hovers) */}
+                <div className="absolute top-[20%] left-0 right-0 h-[45%] flex items-center justify-center z-10">
+                  <motion.img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-contain"
+                    animate={{ y: [0, -10, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  />
+                </div>
 
-                  {/* Packet Image Placeholder */}
-                  <div className="flex-1 w-full relative flex items-center justify-center my-4 group-hover:scale-105 transition-transform duration-500 will-change-transform">
-                    {/* Simplified Shadow for performance */}
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-3/4 h-8 bg-black/20 blur-lg rounded-full" />
-
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      loading="lazy"
-                      className="h-full w-full object-contain relative z-10 mask-packet"
-                    // Removed filter: drop-shadow which is very expensive
-                    />
-
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                      <span className={`bg-white/90 text-nutribowl-dark px-4 py-2 rounded-lg text-xs font-bold shadow-lg backdrop-blur-sm`}>
-                        View Packet
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Product Name */}
-                  <div className="mt-auto space-y-2 pb-4">
-                    <h3 className={`font-serif text-3xl leading-[0.9] ${styles.text}`}>
+                {/* 4. Bottom Information & Action */}
+                <div className="absolute bottom-0 left-0 right-0 p-8 z-20">
+                  <div className="transform group-hover:-translate-y-4 transition-transform duration-500">
+                    <h3 className={`font-serif text-3xl leading-tight mb-2 min-h-[40px] flex items-end ${isPremium ? 'text-white' : 'text-nutribowl-dark'}`}>
                       {product.name}
                     </h3>
-                    <p className={`font-sans text-[11px] tracking-wide opacity-80 ${styles.text} uppercase`}>
+                    <p className={`font-sans text-xs leading-relaxed line-clamp-2 min-h-[32px] ${isPremium ? 'text-white/60' : 'text-nutribowl-dark/60'}`}>
                       {product.description}
                     </p>
+                  </div>
+
+                  {/* Add Button - Expands on Hover */}
+                  <div className="mt-4 flex items-center justify-between opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-75">
+                    <button className="text-[10px] font-bold tracking-[0.2em] uppercase text-white/50 hover:text-white transition-colors whitespace-nowrap">
+                      View Details
+                    </button>
                     <button
                       onClick={() => onAddToCart(product)}
-                      className={`mt-4 w-full ${product.type === 'premium'
-                        ? 'bg-gradient-to-r from-[#D4B483] to-[#C5A059] text-nutribowl-dark hover:brightness-110 shadow-[0_0_15px_rgba(212,180,131,0.2)]'
-                        : 'bg-nutribowl-dark text-white hover:bg-nutribowl-gold'
-                        } py-3 rounded-xl font-sans text-xs font-bold uppercase tracking-widest transition-transform duration-300 transform group-hover:-translate-y-1`}
+                      className={`w-12 h-12 rounded-full ${isPremium ? 'bg-white text-nutribowl-dark' : 'bg-nutribowl-dark text-white'} flex items-center justify-center hover:scale-110 transition-transform shadow-lg`}
                     >
-                      Add to Bowl
+                      <ShoppingBag className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
+
               </motion.div>
             );
           })}
         </AnimatePresence>
       </motion.div>
+
     </section>
   );
 };
