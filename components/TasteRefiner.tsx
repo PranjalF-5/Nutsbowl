@@ -4,9 +4,18 @@ import { motion } from 'framer-motion';
 
 export const TasteRefiner: React.FC = () => {
     const categories = [
-        { id: 1, name: 'Roasted', icon: <Flame className="w-6 h-6 text-nutribowl-gold" />, bg: 'bg-nutribowl-dark' },
-        { id: 2, name: 'Sweet', icon: <Cookie className="w-6 h-6 text-nutribowl-cream" />, bg: 'bg-nutribowl-brown' },
-        { id: 3, name: 'Salty', icon: <Sparkles className="w-6 h-6 text-white/70" />, bg: 'bg-[#3E342F]' },
+        {
+            id: 1, name: 'Roasted', icon: <Flame className="w-6 h-6 text-nutribowl-gold" />,
+            image: 'https://images.unsplash.com/photo-1543158181-1274e5362710?auto=format&fit=crop&q=80&w=400'
+        },
+        {
+            id: 2, name: 'Sweet', icon: <Cookie className="w-6 h-6 text-nutribowl-cream" />,
+            image: 'https://images.unsplash.com/photo-1676312656038-689f55e81be7?auto=format&fit=crop&q=80&w=400'
+        },
+        {
+            id: 3, name: 'Salty', icon: <Sparkles className="w-6 h-6 text-white/70" />,
+            image: 'https://images.unsplash.com/photo-1627820752174-acae1b399128?auto=format&fit=crop&q=80&w=400'
+        },
     ];
 
     return (
@@ -26,12 +35,24 @@ export const TasteRefiner: React.FC = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: i * 0.1 }}
-                        className={`${cat.bg} rounded-3xl p-6 aspect-square flex flex-col justify-between cursor-pointer hover:scale-95 transition-transform duration-300 group will-change-transform`}
+                        className="rounded-3xl aspect-square overflow-hidden relative group cursor-pointer hover:scale-95 transition-transform duration-300 will-change-transform"
                     >
-                        <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm group-hover:bg-white/20 transition-colors">
-                            {cat.icon}
+                        {/* Background Image */}
+                        <img
+                            src={cat.image}
+                            alt={cat.name}
+                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        />
+                        {/* Dark Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/10" />
+
+                        {/* Content */}
+                        <div className="relative z-10 p-6 flex flex-col justify-between h-full">
+                            <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm group-hover:bg-white/20 transition-colors">
+                                {cat.icon}
+                            </div>
+                            <span className="font-serif text-xl text-nutribowl-cream">{cat.name}</span>
                         </div>
-                        <span className="font-serif text-xl text-nutribowl-cream">{cat.name}</span>
                     </motion.div>
                 ))}
 
@@ -44,7 +65,7 @@ export const TasteRefiner: React.FC = () => {
                     className="rounded-3xl overflow-hidden aspect-square relative group bg-black"
                 >
                     <img
-                        src="https://images.unsplash.com/photo-1594046243098-0fceea9d451e?auto=format&fit=crop&q=80&w=400"
+                        src="https://images.unsplash.com/photo-1614786972504-9bafb7b90730?auto=format&fit=crop&q=80&w=400"
                         alt="Walnut"
                         className="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-700"
                     />

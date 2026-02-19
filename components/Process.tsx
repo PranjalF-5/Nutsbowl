@@ -13,7 +13,7 @@ const steps = [
     icon: <Sun className="w-6 h-6" />,
     title: "Sun Dried",
     desc: "Naturally dried under the Mediterranean sun.",
-    image: "https://images.unsplash.com/photo-1599522316523-281b374944b2?auto=format&fit=crop&q=80&w=400"
+    image: "https://images.unsplash.com/photo-1642102903918-b97c37955bbf?auto=format&fit=crop&q=80&w=400"
   },
   {
     icon: <PackageCheck className="w-6 h-6" />,
